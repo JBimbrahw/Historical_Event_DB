@@ -9,12 +9,36 @@ const db = require('./db')
 const app = express()
 const port = 80
 
+app.set('view engine', 'ejs')
 app.use(cors())
 app.use(bodyParser())
+app.use(express.static('assets'))
+
+app.get('/', (req, res) => {
+    db.Facts.findAll({
+        order: [
+            ['date', 'ASC'],
+            ['fact', 'ASC']
+        ]
+    }).catch(err => {
+        console.log(err)
+        res.status(500).end()
+    }).then( facts => {
+        console.log(facts)
+        res.render('index', {
+            "facts" : facts
+        })
+    })
+})
 
 //defining a get request on the home route
-app.get('/', (req, res) => {
-    db.Facts.findAll().catch(err => {
+app.get('/api', (req, res) => {
+    db.Facts.findAll({
+        order: [
+            ['date', 'ASC'],
+            ['fact', 'ASC']
+        ]
+    }).catch(err => {
         console.log(err)
         res.status(500).end()
     }).then( facts => {
@@ -23,7 +47,7 @@ app.get('/', (req, res) => {
     })
 })
 
-app.post('/', (req, res) => {
+app.post('/api', (req, res) => {
     console.log(req.body)
     db.Facts.create({fact: req.body.eventdata, date: req.body.year})
         .catch(err =>{
@@ -37,14 +61,16 @@ app.post('/', (req, res) => {
     
 })
 
-
-app.delete('/', (req, res) => {
-    db.Facts.findAll().catch(err => {
+app.delete('/api/:id', (req, res) => {
+    const id = req.params.id
+    db.Facts.destroy({
+        where: { "id": id }
+    }).catch(err => {
         console.log(err)
         res.status(500).end()
-    }).then( facts => {
-        console.log(facts)
-        res.json(facts)
+    }).then( result => {
+        console.log(result)
+        res.json({status: true})
     })
 })
 

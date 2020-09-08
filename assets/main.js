@@ -6,7 +6,7 @@ function saveData() {
   
     console.log(eventdata, year)  
     
-    fetch('http://localhost', {
+    fetch('http://localhost/api', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -19,7 +19,7 @@ function saveData() {
 }
 
 function fetchData() {
-    fetch('http://localhost', {
+    fetch('http://localhost/api', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -48,6 +48,7 @@ function fetchData() {
             dataToShow += row
 
         });
+
         let tbody = document.getElementById("factsTable").getElementsByTagName('tbody')[0]
         tbody.innerHTML = dataToShow
         console.log(tbody)
@@ -58,14 +59,17 @@ function fetchData() {
 
 function deleteData() {
     const record = document.getElementById("id").value
-    fetch('http://localhost/' + record, {
+    fetch('http://localhost/api/' + record, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
     }).then(function (response) { return response.json()})
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data)
+        fetchData()
+      })
       .catch(err => console.log(err))
 }
 

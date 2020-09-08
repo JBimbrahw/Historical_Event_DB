@@ -35,13 +35,21 @@
       </tr>
     </thead>
     <tbody>
-
+        <% facts.forEach(function(fact) { %>
+            <tr>
+                <td><%= fact.id %></td>
+                <td><%= fact.fact %></td>
+                <td><%= fact.date %></td>
+            </tr>
+        <% }); %>
     </tbody>
   </table>
 
   <button type="button" onclick=fetchData()>Fetch Data</button>
   <br><br><br><br>
 
+
+  <p>Enter an id to delete</p>
   <input type="text" id="id">
   <button type="button" onclick=deleteData()>Delete Data</button>
 
