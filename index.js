@@ -1,6 +1,14 @@
 //we are using express to create our server
-
 //later we used docker to set up a postgres database and we used TablePlus as the GUI to set up the table
+
+//This code defines a number of routes:
+//a get for each of the 3 web pages
+//a get to fetch all the facts from the database
+//a post to send a new fact to the db (create a new record)
+//a delete to delete a record - this is the only request that sends a parameter
+//we also have to specify on what port the app is listening -
+//that establishes the channel that serves as an input to our server
+
 
 const express = require('express')
 const cors = require('cors')
