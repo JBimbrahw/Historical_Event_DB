@@ -15,6 +15,10 @@ app.use(bodyParser())
 app.use(express.static('assets'))
 
 app.get('/', (req, res) => {
+    res.render('index')
+})
+
+app.get('/viewdata', (req, res) => {
     db.Facts.findAll({
         order: [
             ['date', 'ASC'],
@@ -25,7 +29,24 @@ app.get('/', (req, res) => {
         res.status(500).end()
     }).then( facts => {
         console.log(facts)
-        res.render('index', {
+        res.render('viewdata', {
+            "facts" : facts
+        })
+    })
+})
+
+app.get('/deletedata', (req, res) => {
+    db.Facts.findAll({
+        order: [
+            ['date', 'ASC'],
+            ['fact', 'ASC']
+        ]
+    }).catch(err => {
+        console.log(err)
+        res.status(500).end()
+    }).then( facts => {
+        console.log(facts)
+        res.render('deletedata', {
             "facts" : facts
         })
     })

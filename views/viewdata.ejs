@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <h1>Historical Events - DB Builder</h1>
+  <div class="form">
+
+    <table id="factsTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Fact</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+          <% facts && facts.forEach(function(fact) { %>
+              <tr>
+                  <td><%= fact.id %></td>
+                  <td><%= fact.fact %></td>
+                  <td><%= fact.date %></td>
+              </tr>
+          <% }); %>
+      </tbody>
+    </table>
+
+    <button type="button" onclick=fetchData()>Fetch Data</button>
+    <br><br><br><br>
+
+    <a href="/">Back to Main Page</a>
+    <a href="/deletedata">Select Data for Deletion</a>
+
+  </div>
+  <script src = "main.js"></script>
+  
+</body>
+</html>

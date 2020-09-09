@@ -1,82 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-	body {background-color: powderblue;}
-	h1   {color: blue;}
-	p    {color: black; font-weight : bold}
-
-
-</style>
+  <link href="styles.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
+  <h1>Historical Events - DB Builder</h1>
+  <div class="form">
+    <p>Please Enter an Event Below:</p>
+    <textarea id="event" name="event" rows="8" cols="100"></textarea>
 
-<h1>Historical Events - DB Builder</h1>
+    <p>Please Enter the Year it Happened:</p>
+    <input type="text" id="year" name="year"><br><br><br><br>
+    <button type="button" onclick=saveData()>Save Data</button>
+    <br><br>
 
-<div class="form">
-  <p>Please Enter an Event Below:</p>
-  <textarea id="event" name="event" rows="8" cols="100"></textarea>
+    <a href="/viewdata">View All Data</a>
 
-  <p>Please Enter the Year it Happened:</p>
-  <input type="text" id="year" name="year"><br><br><br><br>
-  <button type="button" onclick=saveData()>Save Data</button>
-  <br><br><br><br>
+    
 
-
-
-
-  <table id="factsTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Fact</th>
-        <th>Date</th>
-      </tr>
-    </thead>
-    <tbody>
-        <% facts.forEach(function(fact) { %>
-            <tr>
-                <td><%= fact.id %></td>
-                <td><%= fact.fact %></td>
-                <td><%= fact.date %></td>
-            </tr>
-        <% }); %>
-    </tbody>
-  </table>
-
-  <button type="button" onclick=fetchData()>Fetch Data</button>
-  <br><br><br><br>
-
-
-  <p>Enter an id to delete</p>
-  <input type="text" id="id">
-  <button type="button" onclick=deleteData()>Delete Data</button>
-
-</div>
-
-
-<script src = "main.js"></script>
-
-
+  </div>
+  <script src = "main.js"></script>
+  
 </body>
 </html>
-
-<style>
-  table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-    background-color: white;
-  }
-  
-  td, th {
-    border: 1px solid #dddddd;
-    text-align: left;
-    padding: 8px;
-  }
-  
-  tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-  </style>
