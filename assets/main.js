@@ -1,12 +1,15 @@
 //runs on browser side
 
+let randomfact = "", randomfactdate = ""
+let score = 0;
+
 function saveData() {
     const eventdata = document.getElementById("event").value
     const year = document.getElementById("year").value
   
     console.log(eventdata, year)  
     
-    fetch('http://localhost/api', {
+    fetch('/api', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -14,12 +17,16 @@ function saveData() {
       },
       body: JSON.stringify({eventdata, year})
     }).then(function (response) { return response.json()})
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data)
+        document.getElementById("event").value = ""
+        document.getElementById("year").value = ""
+      })
       .catch(err => console.log(err))
 }
 
 function fetchData() {
-    fetch('http://localhost/api', {
+    fetch('/api', {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
@@ -59,7 +66,7 @@ function fetchData() {
 
 function deleteData() {
     const record = document.getElementById("id").value
-    fetch('http://localhost/api/' + record, {
+    fetch('/api/' + record, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -73,9 +80,39 @@ function deleteData() {
       .catch(err => console.log(err))
 }
 
-// justin.com/blogs/:id
-// method: DELETE
+function generateQuestion() {
+  //this function will display a random fact
+  console.log(facts)
+  
+  var factoid = facts[Math.floor(Math.random()*facts.length)]
 
-var para = document.createElement("p");
-var node = document.createTextNode("This is new.");
-para.appendChild(node);
+  randomfact = factoid.fact
+  randomfactdate = factoid.date
+  console.log(randomfactdate)
+
+  document.getElementById("event").value = randomfact
+}
+
+function checkAnswer() {
+  document.getElementById("date").value = randomfactdate
+
+  if (document.getElementById("guess").value === randomfactdate) {
+    document.getElementById("resultText").innerHTML = "Good Job!"
+    score++;
+  }
+  else {
+    document.getElementById("resultText").innerHTML = "Keep Studying"
+  }
+
+  document.getElementById("scoretext").innerHTML = score
+
+}
+
+
+
+// // justin.com/blogs/:id
+// // method: DELETE
+
+// var para = document.createElement("p");
+// var node = document.createTextNode("This is new.");
+// para.appendChild(node);

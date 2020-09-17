@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <head>
   <link href="styles.css" rel="stylesheet" type="text/css">
 </head>
@@ -17,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-          <% facts.forEach(function(fact) { %>
+          <% facts && facts.forEach(function(fact) { %>
               <tr>
                   <td><%= fact.id %></td>
                   <td><%= fact.fact %></td>
@@ -27,12 +26,12 @@
       </tbody>
     </table>
 
-    <button type="button" onclick=fetchData()>Fetch Data</button>
+    <button onclick=fetchData()>Fetch Data</button>
     <br><br><br><br>
 
     <p>Enter an id to delete</p>
     <input type="text" id="id">
-    <button type="button" onclick=deleteData()>Delete Data</button>
+    <button onclick=deleteData()>Delete Data</button>
     <br>
     <a href="/">Back to Main Page</a>
 

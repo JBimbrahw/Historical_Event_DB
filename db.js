@@ -1,7 +1,9 @@
 const { Sequelize, Model, DataTypes } = require('sequelize');
+require('dotenv').config()
 
-const sequelize = new Sequelize('RandomFacts', 'postgres', 'Justin', {
-    host: 'localhost',
+const sequelize = new Sequelize(process.env.DB_NAME || 'RandomFacts', process.env.DB_USER || 'postgres', process.env.DB_PASSWORD || 'Secret123', {
+    //host: 'database-history.c38rmlslmqvn.us-east-1.rds.amazonaws.com',
+    host: process.env.DB_HOST || 'database-history.c38rmlslmqvn.us-east-1.rds.amazonaws.com',
     dialect: 'postgres',
     port: '5432'
 });
