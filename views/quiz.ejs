@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="styles.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <h1>Historical Events - Quiz</h1>
+  <div class="form">
+    <!-- <%- JSON.stringify(facts) %> -->
+    <button type="button" onclick=generateQuestion()>Quiz Me!</button>
+
+    <p>Historical Event:</p>
+    <textarea id="event" name="event" rows="8" cols="100"></textarea>
+
+    <p>Guess the Year it Happened and Then Check Your Answer:</p>
+    <input type="text" id="guess">
+    <br><br>
+    <p id = "resultText"></p>
+    <span>Your Score: </span><span id= "scoretext"></span><br><br>
+
+    <button type="button" onclick=checkAnswer()>Show Date</button>
+    <input type="text" id="date">
+    <br><br>
+
+    <a href="/">Back to Main Page</a>
+
+  </div>
+  <script>
+    let facts=<%- JSON.stringify(facts) %>
+  </script>
+  <script src = "main.js"></script>
+  
+</body>
+</html>
