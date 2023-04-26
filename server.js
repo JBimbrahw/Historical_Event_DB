@@ -1,5 +1,5 @@
 //we are using express to create our server
-//later we used docker to set up a postgres database and we used TablePlus as the GUI to set up the table
+//we use docker to set up a postgres database and we used TablePlus as the GUI to set up the table
 
 //This code defines a number of routes:
 //a get for each of the 3 web pages
@@ -45,8 +45,8 @@ app.get('/viewdata', (req, res) => {
     }).then( facts => {
         console.log(facts)
         res.render('viewdata', {
-            "facts" : facts     //I tried changing "facts" to something else
-        })                     //it must also be changed accordingly in viewdata.ejs
+            "facts" : facts
+        })
     })
 })
 
@@ -100,11 +100,6 @@ app.get('/api', (req, res) => {
     })
 })
 
-
-//WHAT IS METADATA BELOW?
-//IT LOOKS LIKE THE DB CREATES THE OTHER COLUMN ENTRIES
-//ON ITS OWN
-
 app.post('/api', (req, res) => {
     console.log(req.body)
     db.Facts.create({fact: req.body.eventdata, date: req.body.year})
@@ -136,7 +131,6 @@ app.listen(port, () => {
     console.log(`Example app listening at http://localhost:${port}`)
 })
 
-//HOW COME THIS DOES NOT DO ANYTHING?
 console.log(process.env)
 
 //# npm i pg pg-hstore sequelize
